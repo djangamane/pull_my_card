@@ -15,6 +15,7 @@ const Icons = {
 
 export default function App(){
   const [activeTab, setActiveTab] = useState('interviews')
+  const [menuOpen, setMenuOpen] = useState(false)
 
   return (
     <div className="min-h-screen bg-[#0f172a] relative">
@@ -28,8 +29,25 @@ export default function App(){
           <div className="flex gap-4">
             <button className="bg-white text-black px-4 py-2 rounded-full font-bold text-sm hover:bg-gray-200 transition">Book Romeo</button>
           </div>
+          <div className="md:hidden">
+            <button onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu" className="text-white hover:text-gray-300">
+              <span className="w-6 h-6">{Icons.Play /* reuse an icon or replace with menu icon if desired */}</span>
+            </button>
+          </div>
         </div>
       </nav>
+
+      {/* Mobile menu */}
+      {menuOpen && (
+        <div className="md:hidden fixed top-20 left-0 right-0 z-40 bg-black/95 border-b border-white/10 py-4">
+          <div className="max-w-7xl mx-auto px-4 space-y-3">
+            <a href="/index.html" className="block text-white py-2">The Tour</a>
+            <a href="/kid_reporter_page.html" className="block text-white py-2">The Kid Reporter</a>
+            <a href="#scout" className="block text-yellow-400 py-2">The Scout AI</a>
+            <a href="#shop" className="block text-white py-2">Shop</a>
+          </div>
+        </div>
+      )}
 
       {/* Hero Section */}
       <header className="relative pt-24 md:pt-32 pb-20 px-4 sm:px-8 overflow-hidden anime-bg">
