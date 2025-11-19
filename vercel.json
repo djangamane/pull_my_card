@@ -5,7 +5,9 @@
   ],
   "routes": [
     { "src": "/$", "dest": "/index.html" },
-    { "src": "/kid-reporter", "dest": "/kid_reporter.vite.html" }
+    { "src": "/kid-reporter", "dest": "/kid_reporter.vite.html" },
+    { "src": "/kid_reporter_page.html", "dest": "/kid_reporter.vite.html" },
+    { "src": "/kid_reporter_page", "dest": "/kid_reporter.vite.html" }
   ],
   "env": {}
 }
