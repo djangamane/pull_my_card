@@ -4,7 +4,7 @@
     { "src": "package.json", "use": "@vercel/static-build" }
   ],
   "routes": [
-    { "src": "/$", "dest": "/kid_reporter.vite.html" },
+    { "src": "/$", "dest": "/index.html" },
     { "src": "/kid-reporter", "dest": "/kid_reporter.vite.html" }
   ],
   "env": {}
