@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pull My Card — Static Preview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Russo+One&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: white; }
+        .font-sport { font-family: 'Russo One', sans-serif; }
+        .glass-panel { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border:1px solid rgba(255,255,255,0.1); }
+        .card-gradient { background: linear-gradient(135deg,#1e3a8a 0%,#3b82f6 100%); }
+        .gold-gradient { background: linear-gradient(135deg,#fbbf24 0%,#d97706 100%); }
+        ::-webkit-scrollbar { width:8px; }
+        ::-webkit-scrollbar-track { background:#0f172a; }
+        ::-webkit-scrollbar-thumb { background:#3b82f6; border-radius:4px; }
+        .animate-fade-in-up { animation: fadeUp .45s ease both; }
+        @keyframes fadeUp { from { opacity:0; transform: translateY(6px); } to { opacity:1; transform:none; } }
+    </style>
+</head>
+<body>
+    <div class="min-h-screen flex flex-col">
+        <nav class="w-full bg-black/90 backdrop-blur-md border-b border-white/10 fixed top-0 z-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-20">
+                        <div class="flex items-center gap-3">
+                        <img src="pull_my_card.jpeg" alt="Pull My Card" class="w-10 h-10 rounded-full object-cover border-2 border-white scale-95" />
+                        <span class="font-sport text-2xl tracking-wider text-white">PULL MY CARD</span>
+                    </div>
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-8">
+                            <a href="#home" class="hover:text-blue-400 transition font-medium">The Tour</a>
+                            <a href="kid_reporter_page.html" class="hover:text-blue-400 transition font-medium">The Kid Reporter</a>
+                            <a href="#scout" class="text-yellow-400 hover:text-yellow-300 transition font-medium flex items-center gap-1">⚡ The Scout AI</a>
+                            <a href="#shop" class="hover:text-blue-400 transition font-medium">Shop</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <section id="home" class="pt-20 relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-900 via-black to-black opacity-80 z-0"></div>
+            <div class="relative z-10 max-w-7xl mx-auto px-4 py-24 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 text-center md:text-left">
+                    <div class="inline-block px-4 py-1 rounded-full bg-yellow-500/20 border border-yellow-500 text-yellow-400 font-bold text-sm mb-6">OFFICIAL TOUR 2025</div>
+                    <h1 class="text-5xl md:text-7xl font-sport italic mb-6 leading-tight">ROAD TO <br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">FANATICS FEST</span></h1>
+                    <p class="text-xl text-gray-300 mb-8 max-w-lg">Join <strong>Romeo</strong>, <strong>Eddy Curry</strong>, and special NBA guests on the ultimate cross-country card collecting journey.</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                        <button class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold text-lg transition">View Tour Map</button>
+                        <button class="px-8 py-4 glass-panel hover:bg-white/10 text-white rounded-lg font-bold text-lg transition border border-white/30">Watch Trailer</button>
+                    </div>
+                </div>
+                <div class="md:w-1/2 mt-12 md:mt-0 relative">
+                    <div class="relative mx-auto w-full max-w-lg aspect-square bg-gradient-to-b from-gray-800 to-black rounded-2xl border-2 border-white/10 shadow-2xl overflow-hidden flex items-center justify-center group">
+                        <img src="romeo_steph.jpeg" alt="Romeo and Steph" class="absolute inset-0 w-full h-full object-cover opacity-60 scale-90 transition-transform duration-700" />
+
+                        <!-- Badge moved inside image container to anchor it to the photo's bottom-left (avoids covering face) -->
+                        <div class="absolute bottom-6 left-4 bg-white text-black p-4 rounded-xl shadow-xl transform -rotate-3">
+                            <p class="font-bold text-xs uppercase tracking-wider">Grand Prize</p>
+                            <p class="font-sport text-xl">WIN THE BUS</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 text-center md:text-left max-w-lg mx-auto">
+                        <h3 class="text-3xl font-sport italic text-white mb-2">PULL MY CARD</h3>
+                        <p class="text-gray-300">Connecting Generations Through The Hobby</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="scout" class="py-20 bg-black relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">⚡ The Scout <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">AI</span></h2>
+                    <p class="text-gray-400 max-w-2xl mx-auto">Not sure what your card is worth? Ask our AI engine. Powered by real-time market data and "Kid Reporter" hype analysis.</p>
+                </div>
+
+                <div class="max-w-3xl mx-auto">
+                    <div class="glass-panel p-2 rounded-2xl border border-white/20 shadow-2xl">
+                        <form id="scout-form" class="relative flex items-center">
+                            <span class="absolute left-4 text-gray-400 w-6 h-6">🔍</span>
+                            <input id="scout-input" type="text" class="w-full bg-transparent text-white p-4 pl-12 text-lg placeholder-gray-500 focus:outline-none" placeholder="e.g., '2015 Steph Curry Prizm' or 'Wemby Rookie'" />
+                            <button id="scout-button" type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-bold transition flex items-center gap-2">Scout It</button>
+                        </form>
+                    </div>
+
+                    <div id="scout-result-container"></div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="bg-blue-900 py-16 relative overflow-hidden">
+            <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                <h2 class="text-3xl font-bold mb-4">Join "The Pull" Newsletter</h2>
+                <p class="text-blue-200 mb-8 max-w-xl mx-auto">Get exclusive tour updates, free card analysis, and a chance to win the bus directly to your inbox.</p>
+                <form class="max-w-md mx-auto flex gap-2 mb-12">
+                    <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-3 rounded-lg text-black focus:outline-none" />
+                    <button class="bg-black text-white px-6 py-3 rounded-lg font-bold hover:bg-gray-900 transition">Subscribe</button>
+                </form>
+                        <div class="border-t border-blue-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="flex items-center gap-2">
+                        <img src="pull_my_card.jpeg" alt="Pull My Card" class="w-8 h-8 rounded-full object-cover scale-95" />
+                        <span class="font-bold">PULL MY CARD</span>
+                    </div>
+                    <div class="text-blue-300 text-sm">© 2025 Pull My Card. All rights reserved.</div>
+                    <div class="flex gap-6 text-sm text-blue-200"><span class="cursor-pointer hover:text-white">Instagram</span><span class="cursor-pointer hover:text-white">TikTok</span><span class="cursor-pointer hover:text-white">Contact</span></div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <noscript>
+        <div style="background:#111;color:#fff;padding:12px;text-align:center;">This page requires JavaScript to show the interactive preview. For search engines, the key content is: Pull My Card — Road to Fanatics Fest, Scout AI tool. Please enable JavaScript or view the pitch download.</div>
+    </noscript>
+
+    <script>
+        // Simple, dependency-free interactive behavior to simulate the Scout AI results.
+        document.addEventListener('DOMContentLoaded', function(){
+            const form = document.getElementById('scout-form');
+            const input = document.getElementById('scout-input');
+            const container = document.getElementById('scout-result-container');
+            const button = document.getElementById('scout-button');
+
+            function renderResult(data){
+                container.innerHTML = `\n                    <div class="mt-8 animate-fade-in-up">\n                        <div class="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl p-1 border border-white/10">\n                            <div class="bg-black/50 rounded-xl p-6">\n                                <div class="flex flex-col md:flex-row gap-6">\n                                    <div class="w-full md:w-1/3 aspect-[3/4] bg-gray-700 rounded-lg overflow-hidden relative">\n                                        <div class="absolute inset-0 flex items-center justify-center text-gray-500">Card Image</div>\n                                        <div class="absolute top-2 right-2 bg-green-500 text-black text-xs font-bold px-2 py-1 rounded">HOT</div>\n                                    </div>\n                                    <div class="w-full md:w-2/3">\n                                        <div class="flex justify-between items-start mb-4">\n                                            <div>\n                                                <h3 class="text-2xl font-bold text-white">${escapeHtml(data.player)}</h3>\n                                                <p class="text-blue-400 text-sm">${escapeHtml(data.rarity)}</p>\n                                            </div>\n                                            <div class="text-right">\n                                                <p class="text-3xl font-bold text-white">${escapeHtml(data.price)}</p>\n                                                <p class="text-green-400 text-sm">▲ ${escapeHtml(data.trend)}</p>\n                                            </div>\n                                        </div>\n                                        <div class="bg-blue-900/20 border border-blue-500/30 p-4 rounded-lg mb-4">\n                                            <h4 class="text-blue-400 text-xs font-bold uppercase tracking-widest mb-2">The Kid Reporter Take</h4>\n                                            <p class="text-gray-300 italic">"${escapeHtml(data.insight)}"</p>\n                                        </div>\n                                        <div class="w-full bg-gray-700 rounded-full h-2.5 mb-1">\n                                            <div class="bg-yellow-500 h-2.5 rounded-full" style="width: ${data.hype}%"></div>\n                                        </div>\n                                        <div class="flex justify-between text-xs text-gray-500">\n                                            <span>Cold</span>\n                                            <span>Hype Meter: ${data.hype}/100</span>\n                                            <span>Fire</span>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                `;
+            }
+
+            function escapeHtml(s){
+                return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+            }
+
+            form.addEventListener('submit', function(e){
+                e.preventDefault();
+                const q = input.value && input.value.trim();
+                if(!q) return;
+                button.disabled = true;
+                const originalText = button.textContent;
+                button.textContent = 'Scanning...';
+
+                setTimeout(() => {
+                    const result = {
+                        player: q,
+                        price: '$340.00',
+                        trend: '+18% this week',
+                        insight: 'Value skyrocketing due to recent playoff performance. "The Kid Reporter" says: BUY NOW before the finals!',
+                        rarity: 'Holofoil /99',
+                        hype: 85
+                    };
+                    renderResult(result);
+                    button.disabled = false;
+                    button.textContent = originalText;
+                }, 1100);
+            });
+        });
+    </script>
+</body>
+</html>

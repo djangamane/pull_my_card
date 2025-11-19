@@ -1,0 +1,30 @@
+/* Import Google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Russo+One&family=Bangers&family=Rock+Salt&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body { @apply bg-[#0f172a] text-white; font-family: 'Inter', sans-serif; }
+.font-anime { font-family: 'Bangers', cursive; letter-spacing: .05em; }
+.font-sport { font-family: 'Russo One', sans-serif; }
+.font-signature { font-family: 'Rock Salt', cursive; }
+
+/* Anime-bg speed lines */
+.anime-bg { background: radial-gradient(circle at center, #1e3a8a 0%, #0f172a 100%); position: relative; overflow: hidden; }
+.anime-bg::before { content: ''; position: absolute; top:50%; left:50%; width:200%; height:200%; background: repeating-conic-gradient(from 0deg, rgba(255,255,255,0.03) 0deg 10deg, transparent 10deg 20deg); transform: translate(-50%,-50%); animation: spin 60s linear infinite; }
+@keyframes spin { from { transform: translate(-50%,-50%) rotate(0deg);} to{ transform: translate(-50%,-50%) rotate(360deg);} }
+
+/* ROMEO label animation */
+@keyframes romeoIn { 0%{opacity:0;transform:translateY(14px) scale(.95) rotate(3deg);} 100%{opacity:1;transform:translateY(0) scale(1) rotate(3deg);} }
+.romeo-label { animation: romeoIn 900ms cubic-bezier(.2,.9,.3,1) both; transform-origin: center right; }
+.romeo-label:hover { transform: translateY(-6px) scale(1.04) rotate(3deg); transition: transform 220ms cubic-bezier(.2,.9,.3,1); }
+
+@keyframes statPop { 0%{opacity:0;transform:translateY(8px) scale(.98);} 100%{opacity:1;transform:translateY(0) scale(1);} }
+.grid-stats .stat-number { opacity:0; transform:translateY(8px) scale(.98); animation: statPop 600ms cubic-bezier(.2,.9,.3,1) forwards; }
+.grid-stats > div:nth-child(1) .stat-number { animation-delay: 150ms; }
+.grid-stats > div:nth-child(2) .stat-number { animation-delay: 300ms; }
+.grid-stats > div:nth-child(3) .stat-number { animation-delay: 450ms; }
+.grid-stats > div:nth-child(4) .stat-number { animation-delay: 600ms; }
+
+@media (max-width: 640px) { .hero-title-small { font-size: 3rem; } .pt-24 { padding-top: 6rem; } }
