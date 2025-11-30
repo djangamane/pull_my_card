@@ -79,23 +79,42 @@
             const [loading, setLoading] = useState(false);
             const [menuOpen, setMenuOpen] = useState(false);
 
-            // Mock AI Function
-            const handleSearch = (e) => {
+            const handleSearch = async (e) => {
                 e.preventDefault();
-                if(!searchQuery) return;
-                setLoading(true);
+                if (!searchQuery) return;
                 
-                // Simulating AI Analysis
-                setTimeout(() => {
-                    setAiResult({
-                        player: searchQuery,
-                        price: "$340.00",
-                        trend: "+18% this week",
-                        insight: "Value skyrocketing due to recent playoff performance. 'The Kid Reporter' says: BUY NOW before the finals!",
-                        rarity: "Holofoil /99"
+                setLoading(true);
+                setAiResult(null); // Clear previous results
+
+                try {
+                    const response = await fetch('http://localhost:3001/api/scout', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ query: searchQuery }),
                     });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    setAiResult(result);
+
+                } catch (error) {
+                    console.error("Failed to fetch AI analysis:", error);
+                    // Optionally, set an error state to show in the UI
+                    setAiResult({
+                        player: "Error",
+                        insight: "Could not connect to the Scout AI server. Please try again later.",
+                        rarity: "N/A",
+                        price: "N/A",
+                        trend: "N/A"
+                    });
+                } finally {
                     setLoading(false);
-                }, 1500);
+                }
             };
 
             return (
@@ -231,7 +250,7 @@
                                                 <div className="flex flex-col md:flex-row gap-6">
                                                     <div className="w-full md:w-1/3 aspect-[3/4] bg-gray-700 rounded-lg overflow-hidden relative">
                                                         <div className="absolute inset-0 flex items-center justify-center text-gray-500">Card Image</div>
-                                                        <div className="absolute top-2 right-2 bg-green-500 text-black text-xs font-bold px-2 py-1 rounded">HOT</div>
+                                                        {aiResult.hypeMeter > 75 && <div className="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded animate-pulse">HOT</div>}
                                                     </div>
                                                     <div className="w-full md:w-2/3">
                                                         <div className="flex justify-between items-start mb-4">
@@ -240,24 +259,30 @@
                                                                 <p className="text-blue-400 text-sm">{aiResult.rarity}</p>
                                                             </div>
                                                             <div className="text-right">
-                                                                <p className="text-3xl font-bold text-white">{aiResult.price}</p>
-                                                                <p className="text-green-400 text-sm flex items-center justify-end gap-1">
-                                                                    <span className="w-4 h-4">{Icons.TrendingUp}</span> {aiResult.trend}
+                                                                <p className="text-3xl font-bold text-white">${aiResult.estimatedValue}</p>
+                                                                <p className={`text-sm flex items-center justify-end gap-1 ${aiResult.valueTrend === 'increasing' ? 'text-green-400' : 'text-red-400'}`}>
+                                                                    <span className="w-4 h-4">{Icons.TrendingUp}</span> {aiResult.valueTrend}
                                                                 </p>
                                                             </div>
                                                         </div>
                                                         
                                                         <div className="bg-blue-900/20 border border-blue-500/30 p-4 rounded-lg mb-4">
                                                             <h4 className="text-blue-400 text-xs font-bold uppercase tracking-widest mb-2">The Kid Reporter Take</h4>
-                                                            <p className="text-gray-300 italic">"{aiResult.insight}"</p>
+                                                            <p className="text-gray-300 italic">"{aiResult.kidReporterInsight}"</p>
+                                                        </div>
+
+                                                        <div className="mb-4">
+                                                            <h4 className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-2">Scout's Analysis</h4>
+                                                            <p className="text-gray-300 text-sm mb-1"><strong>Short Term:</strong> {aiResult.shortTermOutlook}</p>
+                                                            <p className="text-gray-300 text-sm"><strong>Risk Factors:</strong> {aiResult.riskAnalysis}</p>
                                                         </div>
 
                                                         <div className="w-full bg-gray-700 rounded-full h-2.5 mb-1">
-                                                            <div className="bg-yellow-500 h-2.5 rounded-full" style={{width: '85%'}}></div>
+                                                            <div className="bg-yellow-400 h-2.5 rounded-full" style={{width: `${aiResult.hypeMeter}%`}}></div>
                                                         </div>
                                                         <div className="flex justify-between text-xs text-gray-500">
                                                             <span>Cold</span>
-                                                            <span>Hype Meter: 85/100</span>
+                                                            <span>Hype Meter: {aiResult.hypeMeter}/100</span>
                                                             <span>Fire</span>
                                                         </div>
                                                     </div>
