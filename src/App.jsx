@@ -13,9 +13,54 @@ const Icons = {
   Play: <Icon path={<><polygon points="5 3 19 12 5 21 5 3"/></>} className="w-8 h-8 text-white fill-current" />
 }
 
+const NEWSLETTER_ARCHIVE = [
+  {
+    id: "2025-02-01",
+    date: "Feb 1, 2025",
+    headline: "Fanatics Marketplace Heats Up Before Fest",
+    summary: "Scout AI spotted a surge in Wemby and Caitlin Clark listings plus a quiet Topps Chrome shock drop. Kid Reporter says keep dry powder for late-night auctions.",
+    moves: [
+      "Fanatics ML flows spiked 18% week-over-week on flagship rookies",
+      "Three sketchy “flash breaks” flagged—avoid wire-only rooms",
+      "Topps quietly tested a limited Chrome minis drop Thursday night",
+    ],
+  },
+  {
+    id: "2025-01-24",
+    date: "Jan 24, 2025",
+    headline: "Kid Reporter: Pop Control vs. Hype Train",
+    summary: "PSA 10 pop counts on Prizm Silvers are creeping up, but hype on first autos is still ripping. Scout AI keeps a red light on mystery slab promos.",
+    moves: [
+      "Scout AI: Wemby Silver PSA10 pop +6% this month—set bid caps",
+      "Fanatics/Topps parallel odds tweaked—read the fine print before ripping",
+      "Avoid “one-card mystery slabs” with no cert preview",
+    ],
+  },
+  {
+    id: "2025-01-17",
+    date: "Jan 17, 2025",
+    headline: "Card Watch: Scammy Vault Invites",
+    summary: "Perplexity scan caught fake vault emails spoofing Fanatics. Kid Reporter reminds: never ship without verified labels.",
+    moves: [
+      "Verified invite link or it’s a pass—no label, no ship",
+      "Set alerts on high-risk sellers offering bulk graded lots",
+      "Hang tight for Fanatics Fest pricing cues before chasing grails",
+    ],
+  },
+];
+
 export default function App(){
   const [activeTab, setActiveTab] = useState('interviews')
   const [menuOpen, setMenuOpen] = useState(false)
+  const [email, setEmail] = useState('')
+  const [subscribed, setSubscribed] = useState(false)
+
+  const handleSubscribe = (event) => {
+    event.preventDefault()
+    if (!email.trim()) return
+    setSubscribed(true)
+    setEmail('')
+  }
 
   return (
     <div className="min-h-screen bg-[#0f172a] relative">
@@ -207,6 +252,96 @@ export default function App(){
                 <div className="bg-black/50 p-3 rounded-lg"><p className="text-xs text-gray-300 italic">"The hype is real. His wingspan is wider than the bus. Buy now before Fanatics Fest." - <span className="text-yellow-500 font-bold not-italic">Romeo</span></p></div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter */}
+      <section id="newsletter" className="py-20 px-4 sm:px-8 border-y border-white/5 bg-gradient-to-b from-[#0c1326] via-[#0f172a] to-[#0b1222]">
+        <div className="max-w-7xl mx-auto grid gap-12 lg:grid-cols-[1.05fr,0.95fr] items-start">
+          <div className="space-y-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-blue-300/70">Scout AI + Kid Reporter</p>
+            <h2 className="text-5xl font-anime italic text-white leading-tight drop-shadow-lg">
+              AI Search + Weekly Newsletter
+            </h2>
+            <p className="text-lg text-blue-100/80 leading-relaxed max-w-2xl">
+              Subscribers get the Scout AI search results plus a Friday drop from the Kid Reporter—pulled from Gemini + Perplexity scans, with extra love for Fanatics marketplace moves.
+            </p>
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="rounded-2xl border border-blue-500/30 bg-white/5 p-5 backdrop-blur">
+                <p className="text-sm text-blue-200 mb-2 font-semibold">What you get</p>
+                <ul className="space-y-2 text-sm text-gray-200">
+                  <li>• Three hottest hobby storylines (cards + culture)</li>
+                  <li>• Card Watch radar from Perplexity deep search</li>
+                  <li>• Fanatics/Topps releases and affiliate-friendly news</li>
+                </ul>
+              </div>
+              <div className="rounded-2xl border border-yellow-400/40 bg-yellow-400/10 p-5">
+                <p className="text-sm text-yellow-200 mb-2 font-semibold">Kid Reporter’s promise</p>
+                <ul className="space-y-2 text-sm text-yellow-50">
+                  <li>• No fluff—real links, real prices, real red flags</li>
+                  <li>• “Move or Pass” takes for every headline</li>
+                  <li>• Shoutouts to collectors who share tips</li>
+                </ul>
+              </div>
+            </div>
+            <form onSubmit={handleSubscribe} className="bg-white/10 border border-white/10 rounded-2xl p-5 flex flex-col gap-3 shadow-xl">
+              <div className="flex flex-col md:flex-row gap-3">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="flex-1 rounded-xl bg-black/40 border border-white/15 px-4 py-3 text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Your email for the Kid Reporter drop"
+                  required
+                />
+                <button
+                  type="submit"
+                  className="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold shadow-lg hover:scale-[1.02] transition"
+                >
+                  Get the drop
+                </button>
+              </div>
+              <p className="text-xs text-gray-300">
+                Runs on Gemini + Perplexity. We’ll plug in Resend once the keys are live.
+              </p>
+              {subscribed && (
+                <p className="text-sm text-green-300">Locked in. The Kid Reporter will keep you posted.</p>
+              )}
+            </form>
+          </div>
+
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-xs uppercase tracking-[0.2em] text-blue-200/70">Recent issues</p>
+                <h3 className="text-3xl font-anime text-white">Newsletter Archive</h3>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-gray-300 bg-white/5 px-3 py-2 rounded-xl border border-white/10">
+                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                Live scouting
+              </div>
+            </div>
+            <div className="grid gap-4">
+              {NEWSLETTER_ARCHIVE.map((issue) => (
+                <article key={issue.id} className="rounded-2xl border border-white/10 bg-white/5 p-5 hover:border-blue-400/40 transition">
+                  <div className="flex items-center justify-between text-xs text-blue-200 mb-2">
+                    <span className="tracking-[0.2em] uppercase">{issue.date}</span>
+                    <span className="px-2 py-1 rounded-full bg-blue-500/20 text-blue-100 font-semibold">Kid Reporter</span>
+                  </div>
+                  <h4 className="text-xl font-semibold text-white mb-2">{issue.headline}</h4>
+                  <p className="text-sm text-gray-200 mb-3">{issue.summary}</p>
+                  <ul className="space-y-2 text-sm text-gray-300">
+                    {issue.moves.map((move, idx) => (
+                      <li key={`${issue.id}-move-${idx}`} className="flex gap-2">
+                        <span className="text-blue-300">•</span>
+                        <span>{move}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </section>
